@@ -5,6 +5,9 @@ from pydantic import BaseModel, SecretStr
 
 class Environments(BaseModel):
     secret_key: SecretStr
+    username: SecretStr
+    password: SecretStr
+
 
 
 class AppSettings(BaseSettings, Environments):
