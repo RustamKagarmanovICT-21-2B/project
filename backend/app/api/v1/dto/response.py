@@ -1,6 +1,19 @@
 from pydantic import BaseModel
 
 
+class TemperatureResponse(BaseResponse):
+    temperature: float
+    humidity: float
+    message: str
+
+
+class DeviceResponse(BaseResponse):
+    """
+    DTO для ответа устройства.
+    """
+    status: str
+    device: str
+
 class BaseResponse(BaseModel):
     pass
 

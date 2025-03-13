@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta, timezone
 from app.core.config import get_app_settings
-from fastapi import HTTPException
-from jwt import encode
+from fastapi import HTTPException, Depends, Header
+from jwt import encode, decode, ExpiredSignatureError, InvalidTokenError
+from starlette import status
+
 
 settings = get_app_settings()
 
@@ -29,3 +31,26 @@ class AuthJWTService:
         to_encode = data.copy()
         to_encode.update({"exp": expire})
         return encode(to_encode, cls.secret_key, algorithm=cls.algorithm)
+    @classmethod
+    def verify_token_dependency(cls, authorization: str = Header(...)):
+        if not authorization.startswith("Bearer "):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Authorization header must start with 'Bearer '",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        token = authorization.split(" ")[1]
+        try:
+            decode(token, cls.secret_key, algorithms=[cls.algorithm])
+        except ExpiredSignatureError:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token has expired",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        except InvalidTokenError:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid token",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
