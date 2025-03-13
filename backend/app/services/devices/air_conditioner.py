@@ -2,9 +2,9 @@ from app.services.devices.base import BaseDeviceService
 
 
 class AirConditionerService(BaseDeviceService):
-    """
-    Сервис управления кондиционером.
-    """
+    device_name = "air_conditioner"
 
-    def __init__(self):
-        super().__init__(pin=27, device_name="air_conditioner")
+    @classmethod
+    def initialize(cls):
+        cls.initialize_gpio(pin=27)
+

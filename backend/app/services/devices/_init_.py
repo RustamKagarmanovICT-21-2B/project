@@ -1,2 +1,3 @@
 from .heater import HeaterService
 from .air_conditioner import AirConditionerService
+from .temperature_sensor import TemperatureSensorService
