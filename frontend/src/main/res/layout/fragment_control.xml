@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonTurnAirConditioner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Включить/Выключить кондиционер" />
+
+        <Button
+            android:id="@+id/buttonAirConditionerStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Проверить состояние кондиционера" />
+
+        <Button
+            android:id="@+id/buttonTurnHeater"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Включить/Выключить обогреватель" />
+
+        <Button
+            android:id="@+id/buttonHeaterStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Проверить состояние обогревателя" />
+
+        <Button
+            android:id="@+id/buttonReadTemperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Проверить температуру и влажность" />
+
+    </LinearLayout>
+</ScrollView>
